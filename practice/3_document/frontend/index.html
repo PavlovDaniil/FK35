@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список файлов с кнопками</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+        }
+        button {
+            margin-left: 10px;
+            padding: 4px 10px;
+            cursor: pointer;
+            border: 1px solid #008cff;
+            background: #008cff;
+            color: white;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #006fcc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Файлы:</h1>
+    <ul id="fileList">
+        <!-- Здесь появятся файлы -->
+    </ul>
+
+    <button id="loadBtn">Загрузить файлы</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
