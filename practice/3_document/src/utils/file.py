@@ -7,17 +7,18 @@ import os
 
 PLACEHOLDER_PATTERN = r"{{(.*?)}}"
 PATH_TEMPLATE = "templates/"
+OUTPUT_DIR = "out/"
 
 
-def generate_pdf_from_template(template_path, output_dir, data: dict):
+def generate_pdf_from_template(file_name: str, data: dict):
     # Загружаем шаблон
-    doc = DocxTemplate(template_path)
+    doc = DocxTemplate(f"{PATH_TEMPLATE}{file_name}")
 
     # Подставляем данные
     doc.render(data)
 
     # Имя временного docx
-    temp_docx = os.path.join(output_dir, f"{uuid.uuid4()}.docx")
+    temp_docx = os.path.join(OUTPUT_DIR, f"{uuid.uuid4()}.docx")
     temp_pdf = temp_docx.replace(".docx", ".pdf")
 
     # Сохраняем docx
@@ -32,7 +33,18 @@ def generate_pdf_from_template(template_path, output_dir, data: dict):
     return temp_pdf
 
 def search(template_name: str) -> set:
-    doc = Document(f"{PATH_TEMPLATE}{template_name}")
+    text = read_file(template_name)
+
+    # ищем плейсхолдеры
+    placeholders = set(re.findall(PLACEHOLDER_PATTERN, text))
+    return placeholders
+
+def get_all_files() -> list:
+    return os.listdir(PATH_TEMPLATE)
+
+def read_file(file_name: str) -> str:
+    doc = Document(f"{PATH_TEMPLATE}{file_name}")
+
     text = ""
 
     # собираем текст из всех параграфов и таблиц
@@ -45,9 +57,4 @@ def search(template_name: str) -> set:
             for cell in row.cells:
                 text += cell.text + "\n"
 
-    # ищем плейсхолдеры
-    placeholders = set(re.findall(PLACEHOLDER_PATTERN, text))
-    return placeholders
-
-def get_all_files() -> list:
-    return os.listdir(PATH_TEMPLATE)
+    return text

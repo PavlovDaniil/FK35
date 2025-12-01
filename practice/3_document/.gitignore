@@ -1,0 +1,4 @@
+.idea
+.venv
+src/out
+test.py
