@@ -1,1 +1,6 @@
 .idea
+practice/.DS_Store
+.DS_Store
+practice/3_document/src/api/__pycache__/__init__.cpython-313.pyc
+practice/3_document/src/api/__pycache__/file.cpython-313.pyc
+practice/3_document/src/utils/__pycache__/file.cpython-313.pyc
